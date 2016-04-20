@@ -55,7 +55,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TestBroda.cs" />
     <Compile Include="TestBrodograditelja.cs" />
+    <Compile Include="TestEliminatoraPolja.cs" />
     <Compile Include="TestFlote.cs" />
     <Compile Include="TestMreže.cs" />
     <Compile Include="TestPolja.cs" />

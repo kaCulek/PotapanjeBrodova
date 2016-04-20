@@ -13,8 +13,7 @@ namespace UnitTests
     {
         private IEnumerable<Polje> SložiPolja(Smjer smjer, Polje početno, int duljinaBroda)
         {
-            Brodograditelj b = new Brodograditelj();
-            return b.DajPoljaZaBrod(smjer, početno, duljinaBroda);
+            return Mreža.DajPoljaZaBrod(smjer, početno, duljinaBroda);
         }
 
         [TestMethod]

@@ -129,7 +129,7 @@ namespace UnitTests
         public void Brodograditelj_DajPoljaZaBrodVraćaListuOd3HorizontalnaPolja()
         {
             Brodograditelj b = new Brodograditelj();
-            var polja = b.DajPoljaZaBrod(Smjer.Horizontalno, new Polje(3, 6), 3);
+            var polja = Mreža.DajPoljaZaBrod(Smjer.Horizontalno, new Polje(3, 6), 3);
             Assert.AreEqual(3, polja.Count());
             Assert.IsTrue(polja.Contains(new Polje(3, 6)));
             Assert.IsTrue(polja.Contains(new Polje(3, 7)));
@@ -140,122 +140,13 @@ namespace UnitTests
         public void Brodograditelj_DajPoljaZaBrodVraćaListuOd2VertikalnaPolja()
         {
             Brodograditelj b = new Brodograditelj();
-            var polja = b.DajPoljaZaBrod(Smjer.Vertikalno, new Polje(3, 6), 2);
+            var polja = Mreža.DajPoljaZaBrod(Smjer.Vertikalno, new Polje(3, 6), 2);
             Assert.AreEqual(2, polja.Count());
             Assert.IsTrue(polja.Contains(new Polje(3, 6)));
             Assert.IsTrue(polja.Contains(new Polje(4, 6)));
         }
 
-        [TestMethod]
-        public void Brodograditelj_PoljaKojaTrebaEliminiratiOkoBrodaVraćaPoljaBrodaISvaOkolnaPoljaZaBrodUSrediniMreže()
-        {
-            int redaka = 10;
-            int stupaca = 10;
-            int duljinaBroda = 4;
-            Polje početnoPolje = new Polje(3, 2);
-            Smjer smjer = Smjer.Vertikalno;
-
-            Brodograditelj b = new Brodograditelj();
-            var poljaBroda = b.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
-
-            var zaEliminirati = b.PoljaKojaTrebaEliminiratiOkoBroda(poljaBroda, redaka, stupaca);
-            Assert.AreEqual(18, zaEliminirati.Count());
-            foreach (Polje p in poljaBroda)
-                Assert.IsTrue(zaEliminirati.Contains(p));
-            // provjerimo polja u uglovima broda (lijevo-gore, lijevo-dolje, desno-gore i desno-dolje)
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(2, 1)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(2, 3)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(7, 1)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(7, 3)));
-        }
-
-        [TestMethod]
-        public void Brodograditelj_PoljaKojaTrebaEliminiratiOkoBrodaVraćaPoljaBrodaIPoljaIspodIDesnoZaBrodUGornjemLijevomKutuMreže()
-        {
-            int redaka = 10;
-            int stupaca = 10;
-            int duljinaBroda = 4;
-            Polje početnoPolje = new Polje(0, 0);
-            Smjer smjer = Smjer.Horizontalno;
-
-            Brodograditelj b = new Brodograditelj();
-            var poljaBroda = b.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
-
-            var zaEliminirati = b.PoljaKojaTrebaEliminiratiOkoBroda(poljaBroda, redaka, stupaca);
-            Assert.AreEqual(10, zaEliminirati.Count());
-            foreach (Polje p in poljaBroda)
-                Assert.IsTrue(zaEliminirati.Contains(p));
-            // provjerimo 3 krajnja polja uz brod (ispod-lijevo, ispod-desno, desno)
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(1, 0)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(1, 4)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(0, 4)));
-        }
-
-        [TestMethod]
-        public void Brodograditelj_PoljaKojaTrebaEliminiratiOkoBrodaVraćaPoljaBrodaIPoljaLijevoIIspodZaBrodUGornjemDesnomKutuMreže()
-        {
-            int redaka = 10;
-            int stupaca = 10;
-            int duljinaBroda = 4;
-            Polje početnoPolje = new Polje(0, stupaca - 1);
-            Smjer smjer = Smjer.Vertikalno;
-
-            Brodograditelj b = new Brodograditelj();
-            var poljaBroda = b.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
-
-            var zaEliminirati = b.PoljaKojaTrebaEliminiratiOkoBroda(poljaBroda, redaka, stupaca);
-            Assert.AreEqual(10, zaEliminirati.Count());
-            foreach (Polje p in poljaBroda)
-                Assert.IsTrue(zaEliminirati.Contains(p));
-            // provjerimo 3 krajnja polja uz brod (lijevo-gore, lijevo-ispod, ispod)
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(0, stupaca - 2)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(duljinaBroda, stupaca - 2)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(duljinaBroda, stupaca - 1)));
-        }
-
-        [TestMethod]
-        public void Brodograditelj_PoljaKojaTrebaEliminiratiOkoBrodaVraćaPoljaBrodaIPoljaLijevoIIznadZaBrodUDonjemDesnomKutuMreže()
-        {
-            int redaka = 10;
-            int stupaca = 10;
-            int duljinaBroda = 4;
-            Polje početnoPolje = new Polje(redaka - 1, stupaca - duljinaBroda);
-            Smjer smjer = Smjer.Horizontalno;
-
-            Brodograditelj b = new Brodograditelj();
-            var poljaBroda = b.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
-
-            var zaEliminirati = b.PoljaKojaTrebaEliminiratiOkoBroda(poljaBroda, redaka, stupaca);
-            Assert.AreEqual(10, zaEliminirati.Count());
-            foreach (Polje p in poljaBroda)
-                Assert.IsTrue(zaEliminirati.Contains(p));
-            // provjerimo 3 krajnja polja uz brod (lijevo, lijevo-iznad, desno iznad)
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(redaka - 1, početnoPolje.Stupac - 1)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(redaka - 2, početnoPolje.Stupac - 1)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(redaka - 2, stupaca - 1)));
-        }
-
-        [TestMethod]
-        public void Brodograditelj_PoljaKojaTrebaEliminiratiOkoBrodaVraćaPoljaBrodaIPoljaLijevoIIznadZaBrodUDonjemLijevomKutuMreže()
-        {
-            int redaka = 10;
-            int stupaca = 10;
-            int duljinaBroda = 4;
-            Polje početnoPolje = new Polje(redaka - duljinaBroda, 0);
-            Smjer smjer = Smjer.Vertikalno;
-
-            Brodograditelj b = new Brodograditelj();
-            var poljaBroda = b.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
-
-            var zaEliminirati = b.PoljaKojaTrebaEliminiratiOkoBroda(poljaBroda, redaka, stupaca);
-            Assert.AreEqual(10, zaEliminirati.Count());
-            foreach (Polje p in poljaBroda)
-                Assert.IsTrue(zaEliminirati.Contains(p));
-            // provjerimo 3 krajnja polja uz brod (iznad, iznad-desno, desno dolje)
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(početnoPolje.Redak - 1, 0)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(početnoPolje.Redak - 1, 1)));
-            Assert.IsTrue(zaEliminirati.Contains(new Polje(redaka - 1, 1)));
-        }
+       
 
         [TestMethod]
         public void Brodograditelj_SložiFlotuVraćaFlotuSaZadanimBrojemBrodova()

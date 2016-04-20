@@ -5,6 +5,13 @@ using System.Text;
 
 namespace PotapanjeBrodova
 {
+    public enum RezultatGađanja
+    {
+        Promašaj,
+        Pogodak,
+        Potonuće
+    }
+
     public class Brod
     {
         public Brod(IEnumerable<Polje> polja)
