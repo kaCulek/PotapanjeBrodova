@@ -59,6 +59,7 @@
     <Compile Include="TestBrodograditelja.cs" />
     <Compile Include="TestEliminatoraPolja.cs" />
     <Compile Include="TestFlote.cs" />
+    <Compile Include="TestKružnogPucača.cs" />
     <Compile Include="TestMreže.cs" />
     <Compile Include="TestNapipača.cs" />
     <Compile Include="TestPolja.cs" />
