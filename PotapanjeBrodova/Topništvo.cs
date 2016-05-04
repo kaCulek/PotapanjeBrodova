@@ -21,7 +21,7 @@ namespace PotapanjeBrodova
 
         public Polje UputiPucanj()
         {
-            throw new NotImplementedException();
+            return pucač.UputiPucanj();
         }
 
         public void ObradiGađanje(RezultatGađanja rezultat)
@@ -40,6 +40,7 @@ namespace PotapanjeBrodova
         private void PromijeniTaktikuUNapipavanje()
         {
             TrenutnaTaktika = TaktikaGađanja.Napipavanje;
+            pucač = new Napipač(mreža, duljinaBroda);
         }
 
         private void PromijeniTaktikuUOkruživanje()
@@ -56,5 +57,7 @@ namespace PotapanjeBrodova
         {
             get; private set;
         }
+
+        iPucač pucač;
     }
 }
