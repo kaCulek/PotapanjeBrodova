@@ -51,5 +51,41 @@ namespace UnitTests
             Assert.IsFalse(m.DajSlobodnaPolja().Contains(new Polje(1, 1)));
         }
 
+        [TestMethod]
+        public void Mreža_DajPoljaUZadanomSmjeruVraćaListuOd1PoljaIznadZaPolje1_6()
+        {
+            Mreža m = new Mreža(10, 10);
+            var polja = m.DajPoljaUZadanomSmjeru(1, 6, Smjer.Gore);
+            Assert.AreEqual(1, polja.Count());
+            Assert.IsTrue(polja.Contains(new Polje(0, 6)));
+        }
+
+        [TestMethod]
+        public void Mreža_DajPoljaUZadanomSmjeruVraćaListuOd3PoljaDesnoZaPolje1_6()
+        {
+            Mreža m = new Mreža(10, 10);
+            var polja = m.DajPoljaUZadanomSmjeru(1, 6, Smjer.Desno);
+            Assert.AreEqual(3, polja.Count());
+            Assert.IsTrue(polja.Contains(new Polje(1, 7)));
+        }
+
+        [TestMethod]
+        public void Mreža_DajPoljaUZadanomSmjeruVraćaListuOd8PoljaDoljeZaPolje1_6()
+        {
+            Mreža m = new Mreža(10, 10);
+            var polja = m.DajPoljaUZadanomSmjeru(1, 6, Smjer.Dolje);
+            Assert.AreEqual(8, polja.Count());
+            Assert.IsTrue(polja.Contains(new Polje(2, 6)));
+        }
+
+        [TestMethod]
+        public void Mreža_DajPoljaUZadanomSmjeruVraćaListuOd6PoljaLijevoZaPolje1_6()
+        {
+            Mreža m = new Mreža(10, 10);
+            var polja = m.DajPoljaUZadanomSmjeru(1, 6, Smjer.Lijevo);
+            Assert.AreEqual(6, polja.Count());
+            Assert.IsTrue(polja.Contains(new Polje(2, 6)));
+        }
+
     }
 }
