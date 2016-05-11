@@ -43,6 +43,7 @@
     <Compile Include="Brodograditelj.cs" />
     <Compile Include="Flota.cs" />
     <Compile Include="IEliminatorPolja.cs" />
+    <Compile Include="IOdabirPočetnogPoljaZaBrod.cs" />
     <Compile Include="iPucač.cs" />
     <Compile Include="KlasičniEliminatorPolja.cs" />
     <Compile Include="KružniPucač.cs" />

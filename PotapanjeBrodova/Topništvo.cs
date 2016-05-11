@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -29,15 +30,33 @@ namespace PotapanjeBrodova
 
         public void ObradiGađanje(RezultatGađanja rezultat)
         {
-            if (rezultat == RezultatGađanja.Pogodak)
+            switch (rezultat)
             {
-                if (TrenutnaTaktika == TaktikaGađanja.Napipavanje)
-                    PromijeniTaktikuUOkruživanje();
-                else if (TrenutnaTaktika == TaktikaGađanja.Okruživanje)
-                    PromijeniTaktikuUSustavnoUništavanje();
+                case RezultatGađanja.Potonuće:
+                    PromijeniTaktikuUNapipavanje();
+                    break;
+                case RezultatGađanja.Pogodak:
+                    switch (TrenutnaTaktika)
+                    {
+                        case TaktikaGađanja.Napipavanje:
+                            PromijeniTaktikuUOkruživanje();
+                            break;
+                        case TaktikaGađanja.Okruživanje:
+                            PromijeniTaktikuUSustavnoUništavanje();
+                            break;
+                        case TaktikaGađanja.SustavnoUništavanje:
+                            break;
+                        default:
+                            Debug.Assert(false, string.Format("Nepodržana taktika {0}", TrenutnaTaktika.ToString()));
+                            break;
+                    }
+                    break;
+                case RezultatGađanja.Promašaj:
+                    break;
+                default:
+                    Debug.Assert(false, string.Format("Nepodržani rezultat gađanja {0}", rezultat.ToString()));
+                    break;
             }
-            else if (rezultat == RezultatGađanja.Potonuće)
-                PromijeniTaktikuUNapipavanje();
         }
 
         private void PromijeniTaktikuUNapipavanje()
@@ -61,7 +80,6 @@ namespace PotapanjeBrodova
             get; private set;
         }
 
-        
         iPucač pucač;
         Mreža mreža;
         List<int> duljineBrodova;

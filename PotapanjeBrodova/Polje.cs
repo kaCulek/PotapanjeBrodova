@@ -25,7 +25,7 @@ namespace PotapanjeBrodova
 
         public override int GetHashCode()
         {
-            return Redak ^ (Stupac >> 16);  
+            return Redak ^ (Stupac >> 16);
         }
 
         public readonly int Redak;
