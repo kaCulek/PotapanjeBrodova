@@ -93,7 +93,7 @@ namespace UnitTests
             Mreža m = new Mreža(10, 10);
             m.EliminirajPolje(6, 6);
             var polja = m.DajPoljaUZadanomSmjeru(1, 6, Smjer.Dolje);
-            Assert.AreEqual(6, polja.Count());
+            Assert.AreEqual(4, polja.Count());
             Assert.IsTrue(polja.Contains(new Polje(2, 6)));
         }
     }

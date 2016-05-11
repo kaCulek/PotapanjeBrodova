@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PotapanjeBrodova;
 
 namespace UnitTests
 {
-    /// <summary>
-    /// Summary description for TestBroda
-    /// </summary>
     [TestClass]
     public class TestBroda
     {
@@ -30,7 +24,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Brod_GađajVraćaPotounćeZaZadnjePoljeKojeJeUBrodu()
+        public void Brod_GađajVraćaPotonućeZaZadnjePoljeKojeJeUBrodu()
         {
             Polje[] polja = { new Polje(1, 2), new Polje(1, 3), new Polje(1, 4) };
             Brod b = new Brod(polja);
@@ -49,14 +43,14 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Brod_GađajVraćaPotonućeZaZadnjePoljeKojeJePonovnoPogođeno()
+        public void Brod_GađajVraćaPotonućeZaZadnjePoljeKojeJePonovnoGađano()
         {
             Polje[] polja = { new Polje(1, 2), new Polje(1, 3), new Polje(1, 4) };
             Brod b = new Brod(polja);
             Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
             Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 4)));
             Assert.AreEqual(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 3)));
-            Assert.AreEqual(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 3)));
+            Assert.AreEqual(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 4)));
         }
     }
 }

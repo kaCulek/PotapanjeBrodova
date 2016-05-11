@@ -1,49 +1,51 @@
 ﻿using System;
 using System.Linq;
-using PotapanjeBrodova;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PotapanjeBrodova;
 
 namespace UnitTests
 {
     [TestClass]
-    public class TestEliminatoraPolja
+    public class TestKlasičnogEliminatoraPolja
     {
         [TestMethod]
-        public void Brodograditelj_PoljaKojaTrebaEliminiratiOkoBrodaVraćaPoljaBrodaISvaOkolnaPoljaZaBrodUSrediniMreže()
+        public void KlasičniEliminatorPolja_PoljaKojaTrebaUklonitiOkoBrodaVraćaPoljaBrodaISvaOkolnaPoljaZaBrodUSrediniMreže()
         {
             int redaka = 10;
             int stupaca = 10;
             int duljinaBroda = 4;
             Polje početnoPolje = new Polje(3, 2);
-            Smjer smjer = Smjer.Vertikalno;
+            Orijentacija smjer = Orijentacija.Vertikalno;
 
-            var poljaBroda = Mreža.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
+            Mreža m = new Mreža(redaka, stupaca);
+            var poljaBroda = m.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
 
             IEliminatorPolja e = new KlasičniEliminatorPolja();
-            var zaEliminirati = e.PoljaKojaTrebaEliminiratiOkoBroda(poljaBroda, redaka, stupaca);
+            var zaEliminirati = e.PoljaKojaTrebaUklonitiOkoBroda(poljaBroda, redaka, stupaca);
             Assert.AreEqual(18, zaEliminirati.Count());
             foreach (Polje p in poljaBroda)
                 Assert.IsTrue(zaEliminirati.Contains(p));
             // provjerimo polja u uglovima broda (lijevo-gore, lijevo-dolje, desno-gore i desno-dolje)
             Assert.IsTrue(zaEliminirati.Contains(new Polje(2, 1)));
             Assert.IsTrue(zaEliminirati.Contains(new Polje(2, 3)));
-           Assert.IsTrue(zaEliminirati.Contains(new Polje(7, 1)));
+            Assert.IsTrue(zaEliminirati.Contains(new Polje(7, 1)));
             Assert.IsTrue(zaEliminirati.Contains(new Polje(7, 3)));
         }
 
         [TestMethod]
-        public void Brodograditelj_PoljaKojaTrebaEliminiratiOkoBrodaVraćaPoljaBrodaIPoljaIspodIDesnoZaBrodUGornjemLijevomKutuMreže()
+        public void KlasičniEliminatorPolja_PoljaKojaTrebaUklonitiOkoBrodaVraćaPoljaBrodaIPoljaIspodIDesnoZaBrodUGornjemLijevomKutuMreže()
         {
             int redaka = 10;
             int stupaca = 10;
             int duljinaBroda = 4;
             Polje početnoPolje = new Polje(0, 0);
-            Smjer smjer = Smjer.Horizontalno;
+            Orijentacija smjer = Orijentacija.Horizontalno;
 
-            var poljaBroda = Mreža.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
+            Mreža m = new Mreža(redaka, stupaca);
+            var poljaBroda = m.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
 
             IEliminatorPolja e = new KlasičniEliminatorPolja();
-            var zaEliminirati = e.PoljaKojaTrebaEliminiratiOkoBroda(poljaBroda, redaka, stupaca);
+            var zaEliminirati = e.PoljaKojaTrebaUklonitiOkoBroda(poljaBroda, redaka, stupaca);
             Assert.AreEqual(10, zaEliminirati.Count());
             foreach (Polje p in poljaBroda)
                 Assert.IsTrue(zaEliminirati.Contains(p));
@@ -54,18 +56,19 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Brodograditelj_PoljaKojaTrebaEliminiratiOkoBrodaVraćaPoljaBrodaIPoljaLijevoIIspodZaBrodUGornjemDesnomKutuMreže()
+        public void KlasičniEliminatorPolja_PoljaKojaTrebaUklonitiOkoBrodaVraćaPoljaBrodaIPoljaLijevoIIspodZaBrodUGornjemDesnomKutuMreže()
         {
             int redaka = 10;
             int stupaca = 10;
             int duljinaBroda = 4;
             Polje početnoPolje = new Polje(0, stupaca - 1);
-            Smjer smjer = Smjer.Vertikalno;
+            Orijentacija smjer = Orijentacija.Vertikalno;
 
-            var poljaBroda = Mreža.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
+            Mreža m = new Mreža(redaka, stupaca);
+            var poljaBroda = m.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
 
             IEliminatorPolja e = new KlasičniEliminatorPolja();
-            var zaEliminirati = e.PoljaKojaTrebaEliminiratiOkoBroda(poljaBroda, redaka, stupaca);
+            var zaEliminirati = e.PoljaKojaTrebaUklonitiOkoBroda(poljaBroda, redaka, stupaca);
             Assert.AreEqual(10, zaEliminirati.Count());
             foreach (Polje p in poljaBroda)
                 Assert.IsTrue(zaEliminirati.Contains(p));
@@ -76,18 +79,19 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Brodograditelj_PoljaKojaTrebaEliminiratiOkoBrodaVraćaPoljaBrodaIPoljaLijevoIIznadZaBrodUDonjemDesnomKutuMreže()
+        public void KlasičniEliminatorPolja_PoljaKojaTrebaUklonitiOkoBrodaVraćaPoljaBrodaIPoljaLijevoIIznadZaBrodUDonjemDesnomKutuMreže()
         {
             int redaka = 10;
             int stupaca = 10;
             int duljinaBroda = 4;
             Polje početnoPolje = new Polje(redaka - 1, stupaca - duljinaBroda);
-            Smjer smjer = Smjer.Horizontalno;
+            Orijentacija smjer = Orijentacija.Horizontalno;
 
-            var poljaBroda = Mreža.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
+            Mreža m = new Mreža(redaka, stupaca);
+            var poljaBroda = m.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
 
             IEliminatorPolja e = new KlasičniEliminatorPolja();
-            var zaEliminirati = e.PoljaKojaTrebaEliminiratiOkoBroda(poljaBroda, redaka, stupaca);
+            var zaEliminirati = e.PoljaKojaTrebaUklonitiOkoBroda(poljaBroda, redaka, stupaca);
             Assert.AreEqual(10, zaEliminirati.Count());
             foreach (Polje p in poljaBroda)
                 Assert.IsTrue(zaEliminirati.Contains(p));
@@ -98,18 +102,19 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Brodograditelj_PoljaKojaTrebaEliminiratiOkoBrodaVraćaPoljaBrodaIPoljaLijevoIIznadZaBrodUDonjemLijevomKutuMreže()
+        public void KlasičniEliminatorPolja_PoljaKojaTrebaUklonitiOkoBrodaVraćaPoljaBrodaIPoljaLijevoIIznadZaBrodUDonjemLijevomKutuMreže()
         {
             int redaka = 10;
             int stupaca = 10;
             int duljinaBroda = 4;
             Polje početnoPolje = new Polje(redaka - duljinaBroda, 0);
-            Smjer smjer = Smjer.Vertikalno;
+            Orijentacija smjer = Orijentacija.Vertikalno;
 
-            var poljaBroda = Mreža.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
+            Mreža m = new Mreža(redaka, stupaca);
+            var poljaBroda = m.DajPoljaZaBrod(smjer, početnoPolje, duljinaBroda);
 
             IEliminatorPolja e = new KlasičniEliminatorPolja();
-            var zaEliminirati = e.PoljaKojaTrebaEliminiratiOkoBroda(poljaBroda, redaka, stupaca);
+            var zaEliminirati = e.PoljaKojaTrebaUklonitiOkoBroda(poljaBroda, redaka, stupaca);
             Assert.AreEqual(10, zaEliminirati.Count());
             foreach (Polje p in poljaBroda)
                 Assert.IsTrue(zaEliminirati.Contains(p));
