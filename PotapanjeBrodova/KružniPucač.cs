@@ -26,6 +26,7 @@ namespace PotapanjeBrodova
             // između najduljih biram jednu slučajnim odabirom
             var najdulji = grupe.First();
             if (najdulji.Count() == 1)
+
                 return najdulji.First().First();
             int indeks = slučajni.Next(0, najdulji.Count());
             return najdulji.ElementAt(indeks).First();
