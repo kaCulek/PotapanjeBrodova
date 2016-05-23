@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace UnitTests
 {
     [TestClass]
-    public class TestSustavogPucača
+    public class TestSustavnogPucača
     {
         [TestMethod]
         public void SustavniPucač_UputiPucanjVraćaLijevoIliDesnoPoljeZaHorizontalniSmjer()

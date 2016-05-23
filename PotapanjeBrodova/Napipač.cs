@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -12,13 +13,34 @@ namespace PotapanjeBrodova
             this.mreža = mreža;
             this.duljinaBroda = duljinaBroda;
         }
+
+        #region Implementacija sučelja IPucač
+
         public Polje UputiPucanj()
         {
             List<Polje> polja = DajKandidateZaHorizontalniBrod().ToList();
             polja.AddRange(DajKandidateZaVertikalniBrod());
+
             int indeks = slučajni.Next(0, polja.Count());
-            return polja[indeks];    
+            zadnjeGađano = polja[indeks];
+            mreža.EliminirajPolje(zadnjeGađano);
+            return zadnjeGađano;
         }
+
+        public void EvidentirajRezultat(RezultatGađanja rezultat)
+        {
+        }
+
+        public IEnumerable<Polje> PogođenaPolja
+        {
+            get
+            {
+                Debug.Assert(zadnjeGađano != null);
+                return new List<Polje> { zadnjeGađano };
+            }
+        }
+
+        #endregion Implementacija sučelja IPucač
 
         public IEnumerable<Polje> DajKandidateZaHorizontalniBrod()
         {
@@ -62,7 +84,7 @@ namespace PotapanjeBrodova
 
                     if (brojačPolja >= duljinaBroda)
                     {
-                        for (int rr = r - duljinaBroda + 1; rr <=r; ++rr)
+                        for (int rr = r - duljinaBroda + 1; rr <= r; ++rr)
                             kandidati.Add(new Polje(rr, s));
                     }
                 }
@@ -70,8 +92,8 @@ namespace PotapanjeBrodova
             return kandidati;
         }
 
-
         private Mreža mreža;
+        private Polje zadnjeGađano;
         private int duljinaBroda;
         private Random slučajni = new Random();
     }

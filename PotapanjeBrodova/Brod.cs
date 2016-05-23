@@ -28,12 +28,10 @@ namespace PotapanjeBrodova
         {
             if (!Polja.Contains(p))
                 return RezultatGađanja.Promašaj;
-            {
-                pogođenaPolja.Add(p);
-                if (pogođenaPolja.Count == Polja.Count())
-                    return RezultatGađanja.Potonuće;
-                return RezultatGađanja.Pogodak;
-            }
+            pogođenaPolja.Add(p);
+            if (pogođenaPolja.Count == Polja.Count())
+                return RezultatGađanja.Potonuće;
+            return RezultatGađanja.Pogodak;
         }
 
         public readonly IEnumerable<Polje> Polja;
